@@ -5,7 +5,32 @@ using nlohmann::json;
 
 
 void print(const Student& student, std::ostream& os) {
-    //...
+    //... ??
+    if (student.name.empty()){
+        os << "null";
+    } else {
+        os << student.name;
+    }
+
+    if (student.avg.type() == typeid(std::nullptr_t)){
+        os << "null";
+    } else if (student.avg.type() == typeid(std::string)){
+        os << std::any_cast<std::string>(student.avg);
+    } else if (student.avg.type() == typeid(std::double_t)){
+        os << std::any_cast<std::double_t>(student.avg);
+    } else {
+        os << std::any_cast<std::size_t>(student.avg);
+    }
+
+    if (student.group.type() == typeid(std::nullptr_t)){
+        os << "null";
+    } else if (student.group.type() == typeid(std::string)){
+        os << std::any_cast<std::string>(student.group);
+    } else {
+        os << std::any_cast<std::size_t>(student.group)
+        << " group";
+    }
+
     if (student.debt.type() == typeid(std::nullptr_t)) {
         os << "null";
     } else if (student.debt.type() == typeid(std::string)) {
