@@ -9,36 +9,36 @@ void print(const Student& student, std::ostream& os) {
     if (student.name.empty()){
         os << "null";
     } else {
-        os << student.name;
-    }
-
-    if (student.avg.type() == typeid(std::nullptr_t)){
-        os << "null";
-    } else if (student.avg.type() == typeid(std::string)){
-        os << std::any_cast<std::string>(student.avg);
-    } else if (student.avg.type() == typeid(std::double_t)){
-        os << std::any_cast<std::double_t>(student.avg);
-    } else {
-        os << std::any_cast<std::size_t>(student.avg);
+        os << "|" << student.name << "|";
     }
 
     if (student.group.type() == typeid(std::nullptr_t)){
         os << "null";
     } else if (student.group.type() == typeid(std::string)){
-        os << std::any_cast<std::string>(student.group);
+        os << std::any_cast<std::string>(student.group) << "|";
     } else {
         os << std::any_cast<std::size_t>(student.group)
-        << " group";
+           << " group|";
+    }
+
+    if (student.avg.type() == typeid(std::nullptr_t)){
+        os << "null";
+    } else if (student.avg.type() == typeid(std::string)){
+        os << std::any_cast<std::string>(student.avg) << "|";
+    } else if (student.avg.type() == typeid(std::double_t)){
+        os << std::any_cast<std::double_t>(student.avg) << "|";
+    } else {
+        os << std::any_cast<std::size_t>(student.avg) << "|";
     }
 
     if (student.debt.type() == typeid(std::nullptr_t)) {
-        os << "null";
+        os << "null|" << std::endl;
     } else if (student.debt.type() == typeid(std::string)) {
-        os << std::any_cast<std::string>(student.debt);
+        os << std::any_cast<std::string>(student.debt) << "|" <<  std::endl;
     } else {
         os
                 << std::any_cast<std::vector<std::string> >(student.debt).size()
-                << " items";
+                << " items|" << std::endl;
     }
 }
 
@@ -50,13 +50,14 @@ void print(const std::vector<Student>& students, std::ostream& os) {
     }
 }
 
-int main(int argc, char* argv[]) {
+int main() {
     std::string jsonPath;
-    if (argc < 1){
-        std::cout << "Не передали путь к файлу" << std::endl;
-    } else {
-        jsonPath = argv[1];
-    }
+    jsonPath = "/Users/pvelp/students.json";
+//    if (argc < 1){
+//        std::cout << "Не передали путь к файлу" << std::endl;
+//    } else {
+//        jsonPath = argv[0];
+//    }
 //...
     std::ifstream file{jsonPath};
     if (!file) {
