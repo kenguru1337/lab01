@@ -6,6 +6,7 @@
 #include <any>
 #include <nlohmann/json.hpp>
 #include <string>
+#include <fstream>
 
 
 using nlohmann::json;
@@ -27,6 +28,6 @@ auto get_group(const json& j) -> std::any;
 
 void from_json(const json& j, Student& s);
 
-
+std::vector<Student> read_file(json data);
 
 #endif // INCLUDE_STUDENT_HPP_

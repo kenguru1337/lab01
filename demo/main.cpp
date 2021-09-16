@@ -1,10 +1,6 @@
 #include <student.hpp>
-#include <fstream>
 
-using nlohmann::json;
-
-
-void print(const Student& student, std::ostream& os) {
+void print(const Student& student, std::ostream& os){
     if (student.name.empty()){
         os << "| null\t|";
     } else {
@@ -54,15 +50,26 @@ void print(const std::vector<Student>& students, std::ostream& os) {
     }
 }
 
+std::vector<Student> read_file(json data) {
+    std::vector<Student> students;
+    for (auto const &item : data.at("items")) {
+        Student student;
+        from_json(item, student);
+        students.push_back(student);
+    }
+    return students;
+}
+
 int main() {
     std::string jsonPath;
     jsonPath = "/Users/pvelp/students.json";
 //    if (argc < 1){
 //        std::cout << "Не передали путь к файлу" << std::endl;
 //    } else {
-//        jsonPath = argv[0];
+//        jsonPath = argv[1];
 //    }
-//...
+
+
     std::ifstream file{jsonPath};
     if (!file) {
         throw std::runtime_error{"unable to open json: " + jsonPath};
@@ -71,12 +78,6 @@ int main() {
     json data;
     file >> data;
 
-    std::vector<Student> students;
-    for (auto const& item : data.at("items")) {
-        Student student;
-        from_json(item, student);
-        students.push_back(student);
-    }
-    //...
+    std::vector<Student> students = read_file(data);
     print(students, std::cout);
 }
