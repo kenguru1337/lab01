@@ -1,10 +1,11 @@
 // Copyright 2020 Your Name <your_email>
 
-#ifndef INCLUDE_HEADER_HPP_
-#define INCLUDE_HEADER_HPP_
+#ifndef INCLUDE_STUDENT_HPP_
+#define INCLUDE_STUDENT_HPP_
 #include <iostream>
 #include <any>
 #include <nlohmann/json.hpp>
+#include <string>
 
 
 using nlohmann::json;
@@ -28,4 +29,4 @@ void from_json(const json& j, Student& s);
 
 
 
-#endif // INCLUDE_HEADER_HPP_
+#endif // INCLUDE_STUDENT_HPP_
