@@ -16,7 +16,6 @@ TEST(ExistFile, Test){
 
 TEST(Meta, Test){
     std::string jsonPath;
-//    jsonPath = "/Users/pvelp/students.json";
     jsonPath = PATH_TO_JSON;
     std::ifstream file{jsonPath};
     json data;
@@ -59,13 +58,4 @@ TEST(isArray, Test){
     file >> data;
     bool val1 = data["items"].is_array();
     EXPECT_EQ(val1, true);
-}
-
-TEST(ValidName, Test){
-    std::string jsonPath = PATH_TO_JSON;
-    std::ifstream file{jsonPath};
-    json data;
-    file >> data;
-    std::vector<Student> students;
-    students = read_file(data);
 }
