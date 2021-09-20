@@ -42,10 +42,6 @@ add_executable(demo
         ${CMAKE_CURRENT_SOURCE_DIR}/sources/student.cpp
 )
 
-#add_executable(sources
-#        ${CMAKE_CURRENT_SOURCE_DIR}/sources/student.cpp
-#        )
-
 target_include_directories(${PROJECT_NAME} PUBLIC
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
   "$<INSTALL_INTERFACE:include>"
