@@ -73,11 +73,12 @@ void print(const Student& student, std::ostream& os){
     if (student.debt.type() == typeid(std::nullptr_t)) {
         os << " null\t\t|" << std::endl;
     } else if (student.debt.type() == typeid(std::string)) {
-        os << " " << std::any_cast<std::string>(student.debt) << "\t\t|" <<  std::endl;
+        os << " " << std::any_cast<std::string>(student.debt)
+                << "\t\t|" <<  std::endl;
     } else {
         os
-                << " " << std::any_cast<std::vector<std::string> >(student.debt).size()
-                << " items\t|" << std::endl;
+        << " " << std::any_cast<std::vector<std::string>>(student.debt).size()
+        << " items\t|" << std::endl;
     }
 }
 
