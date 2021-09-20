@@ -6,9 +6,18 @@ TEST(Example, EmptyTest) {
     EXPECT_TRUE(true);
 }
 
-TEST(Meta, Test2){
+TEST(ExistFile, Test){
     std::string jsonPath;
-    jsonPath = "/Users/pvelp/students.json";
+    jsonPath = PATH_TO_JSON;
+    std::ifstream file{jsonPath};
+    bool val = file.fail();
+    EXPECT_EQ(val, false);
+}
+
+TEST(Meta, Test){
+    std::string jsonPath;
+//    jsonPath = "/Users/pvelp/students.json";
+    jsonPath = PATH_TO_JSON;
     std::ifstream file{jsonPath};
     json data;
     file >> data;
@@ -20,7 +29,7 @@ TEST(Meta, Test2){
 }
 
 
-TEST(Table, Test3){
+TEST(Table, Test){
     std::string tmp = R"(| name          | group     | avg   | debt      |
 |---------------|-----------|-------|-----------|
 | Ivanov Petr	| 1			| 4.25	| null		|
@@ -31,7 +40,7 @@ TEST(Table, Test3){
 |---------------|-----------|-------|-----------|
 )";
 
-    std::string jsonPath = "/Users/pvelp/students.json";
+    std::string jsonPath = PATH_TO_JSON;
     std::ifstream file{jsonPath};
     json data;
     file >> data;
@@ -40,4 +49,23 @@ TEST(Table, Test3){
     std::stringstream os;
     print(students, os);
     EXPECT_EQ(tmp, os.str());
+}
+
+TEST(isArray, Test){
+    std::string jsonPath;
+    jsonPath = PATH_TO_JSON;
+    std::ifstream file{jsonPath};
+    json data;
+    file >> data;
+    bool val1 = data["items"].is_array();
+    EXPECT_EQ(val1, true);
+}
+
+TEST(ValidName, Test){
+    std::string jsonPath = PATH_TO_JSON;
+    std::ifstream file{jsonPath};
+    json data;
+    file >> data;
+    std::vector<Student> students;
+    students = read_file(data);
 }

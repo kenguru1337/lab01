@@ -99,3 +99,5 @@ install(EXPORT "${PROJECT_NAME}-targets"
 
 
 target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
+
+add_definitions("-DPATH_TO_JSON=\"${CMAKE_SOURCE_DIR}/test_file1.json\"")
