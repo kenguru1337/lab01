@@ -59,3 +59,31 @@ TEST(isArray, Test){
     bool val1 = data["items"].is_array();
     EXPECT_EQ(val1, true);
 }
+
+TEST(Types, Test){
+    std::string jsonPath;
+    jsonPath = PATH_TO_JSON;
+    std::ifstream file{jsonPath};
+    json data;
+    file >> data;
+    std::vector<Student> students;
+    students = read_file(data);
+    EXPECT_EQ(std::any_cast<std::string>(students[0].name),"Ivanov Petr");
+    EXPECT_EQ(std::any_cast<std::string>(students[0].group),"1");
+    EXPECT_EQ(std::any_cast<std::string>(students[0].avg),"4.25");
+    EXPECT_EQ(std::any_cast<std::nullptr_t>(students[0].debt), nullptr);
+
+    EXPECT_EQ(std::any_cast<std::string>(students[1].name),"Sidorov Ivan");
+    EXPECT_EQ(std::any_cast<std::size_t>(students[1].group),31);
+    EXPECT_EQ(std::any_cast<std::size_t>(students[1].avg),4);
+    EXPECT_EQ(std::any_cast<std::string>(students[1].debt), "C++");
+
+    EXPECT_EQ(std::any_cast<std::string>(students[2].name),"Pertov Nikita");
+    EXPECT_EQ(std::any_cast<std::string>(students[2].group),"IU8-31");
+    EXPECT_EQ(std::any_cast<std::double_t>(students[2].avg),3.33);
+    std::vector<std::string> tmp;
+    tmp.push_back("C++");
+    tmp.push_back("Linux");
+    tmp.push_back("Network");
+    EXPECT_EQ(std::any_cast<std::vector<std::string>>(students[2].debt), tmp);
+}
