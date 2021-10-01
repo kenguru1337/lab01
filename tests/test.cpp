@@ -60,7 +60,7 @@ TEST(isArray, Test){
     EXPECT_EQ(val1, true);
 }
 
-TEST(Types, Test){
+TEST(ValidInfo, Test){
     std::string jsonPath;
     jsonPath = PATH_TO_JSON;
     std::ifstream file{jsonPath};
@@ -86,4 +86,65 @@ TEST(Types, Test){
     tmp.push_back("Linux");
     tmp.push_back("Network");
     EXPECT_EQ(std::any_cast<std::vector<std::string>>(students[2].debt), tmp);
+}
+
+TEST(DebtType, Test){
+    std::string jsonPath;
+    jsonPath = PATH_TO_JSON;
+    std::ifstream file{jsonPath};
+    json data;
+    file >> data;
+    std::vector<Student> students;
+    students = read_file(data);
+    bool debt_flag = false;
+    for (auto const& student : students) {
+        if (student.debt.type() == typeid(std::nullptr_t)){
+            debt_flag = true;
+        } else if (student.debt.type() == typeid(std::string)){
+            debt_flag = true;
+        } else if (student.debt.type() == typeid(std::vector<std::string>)){
+            debt_flag = true;
+        }
+    }
+    EXPECT_EQ(debt_flag, true);
+}
+
+TEST(GroupType, Test){
+    std::string jsonPath;
+    jsonPath = PATH_TO_JSON;
+    std::ifstream file{jsonPath};
+    json data;
+    file >> data;
+    std::vector<Student> students;
+    students = read_file(data);
+    bool flag = false;
+    for (auto const& student : students) {
+        if (student.group.type() == typeid(std::size_t)){
+            flag = true;
+        } else if (student.group.type() == typeid(std::string)){
+            flag = true;
+        }
+    }
+    EXPECT_EQ(flag, true);
+}
+
+TEST(AvgType, Test) {
+    std::string jsonPath;
+    jsonPath = PATH_TO_JSON;
+    std::ifstream file{jsonPath};
+    json data;
+    file >> data;
+    std::vector<Student> students;
+    students = read_file(data);
+    bool flag = false;
+    for (auto const &student : students) {
+        if (student.avg.type() == typeid(std::size_t)) {
+            flag = true;
+        } else if (student.avg.type() == typeid(std::string)) {
+            flag = true;
+        } else if (student.avg.type() == typeid(std::double_t)) {
+            flag = true;
+        }
+    }
+    EXPECT_EQ(flag, true);
 }
