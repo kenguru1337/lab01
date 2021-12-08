@@ -1,4 +1,4 @@
-// Copyright 2021 Pavel <toschakovpv@yandex.ru>
+// Copyright 2021 Alexey <leo678337@gmail.com>
 
 #include <student.hpp>
 

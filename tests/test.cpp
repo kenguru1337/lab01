@@ -1,4 +1,4 @@
-// Copyright 2020 Your Name <your_email>
+// Copyright 2021 Alexey <leo678337@gmail.com>
 
 #include "student.hpp"
 
@@ -35,7 +35,7 @@ TEST(Table, Test){
 |---------------|-----------|-------|-----------|
 | Sidorov Ivan	| 31 group	| 4		| C++		|
 |---------------|-----------|-------|-----------|
-| Pertov Nikita	| IU8-31	| 3.33	| 3 items	|
+| Petrov Nikita	| IU8-31	| 3.33	| 3 items	|
 |---------------|-----------|-------|-----------|
 )";
 
@@ -78,7 +78,7 @@ TEST(ValidInfo, Test){
     EXPECT_EQ(std::any_cast<std::size_t>(students[1].avg),4);
     EXPECT_EQ(std::any_cast<std::string>(students[1].debt), "C++");
 
-    EXPECT_EQ(std::any_cast<std::string>(students[2].name),"Pertov Nikita");
+    EXPECT_EQ(std::any_cast<std::string>(students[2].name),"Petrov Nikita");
     EXPECT_EQ(std::any_cast<std::string>(students[2].group),"IU8-31");
     EXPECT_EQ(std::any_cast<std::double_t>(students[2].avg),3.33);
     std::vector<std::string> tmp;
@@ -147,4 +147,8 @@ TEST(AvgType, Test) {
         }
     }
     EXPECT_EQ(flag, true);
+}
+int main(int argc, char **argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }

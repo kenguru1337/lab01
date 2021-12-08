@@ -1,12 +1,8 @@
 #include <student.hpp>
 
-int main(int argc, char* argv[]) {
-    std::string jsonPath;
-    if (argc < 2){
-        throw std::runtime_error("Path is not exist");
-    } else {
-        jsonPath = argv[1];
-    }
+int main() {
+    std::string jsonPath =PATH_TO_JSON;
+
 
     std::ifstream file{jsonPath};
     if (!file) {
